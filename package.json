@@ -1,0 +1,31 @@
+{
+  "name": "excel-course",
+  "version": "1.0.0",
+  "description": "Pure-JS Excel application",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack",
+    "build": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xxxDarkhanxxx/pure-excel.git"
+  },
+  "keywords": [
+    "JS",
+    "Javascript",
+    "Excel"
+  ],
+  "author": "Darkhan Akhmetov <darkhanahmetov228@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xxxDarkhanxxx/pure-excel/issues"
+  },
+  "homepage": "https://github.com/xxxDarkhanxxx/pure-excel#readme",
+  "private": true,
+  "devDependencies": {
+    "webpack": "^5.2.0",
+    "webpack-cli": "^4.1.0"
+  }
+}
