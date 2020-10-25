@@ -10,6 +10,8 @@
         "sourceType": "module"
     },
     "rules": {
-        "semi":"warn"
+        "semi":"warn",
+        "object-curly-spacing":"off",
+        "comma-dangle":"off"
     }
 }
