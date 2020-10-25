@@ -13,11 +13,24 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
       rel="stylesheet"
     />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   </head>
   <body>
     <div id="app" class="container">
       <div class="excel">
-        <div class="excel__header"></div>
+        <div class="excel__header">
+          <input type="text" class="excel__header-input" value="Новая таблица" />
+
+          <div class="excel__header-buttons">
+            <div class="excel__header-button">
+              <span class="material-icons"> delete </span>
+            </div>
+
+            <div class="excel__header-button">
+              <span class="material-icons"> exit_to_app </span>
+            </div>
+          </div>
+        </div>
         <div class="excel__toolbar"></div>
         <div class="excel__formula"></div>
         <div class="excel__table"></div>
