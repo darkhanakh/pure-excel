@@ -16,94 +16,45 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   </head>
   <body>
-    <div id="app" class="container">
-      <div class="excel">
-        <div class="excel__header">
-          <input type="text" class="excel__header-input" value="Новая таблица" />
+    <div id="app">
+      <div class="dashboard">
+        <header class="dashboard__header">
+          <h1 class="dashboard__header-title">Excel Dashboard</h1>
+        </header>
 
-          <div class="excel__header-buttons">
-            <div class="excel__header-button button">
-              <span class="material-icons"> delete </span>
-            </div>
-
-            <div class="excel__header-button button">
-              <span class="material-icons"> exit_to_app </span>
-            </div>
+        <div class="dashboard__new">
+          <div class="dashboard__wrapper">
+            <a href="#" class="dashboard__create">
+              Новая <br />
+              Таблица
+            </a>
           </div>
         </div>
 
-        <div class="excel__toolbar">
-          <div class="excel__toolbar-button button">
-            <span class="material-icons"> format_align_left </span>
-          </div>
-          <div class="excel__toolbar-button button">
-            <span class="material-icons"> format_align_justify </span>
-          </div>
-          <div class="excel__toolbar-button button">
-            <span class="material-icons"> format_align_right </span>
-          </div>
-          <div class="excel__toolbar-button button">
-            <span class="material-icons"> format_bold </span>
-          </div>
-          <div class="excel__toolbar-button button">
-            <span class="material-icons"> format_italic</span>
-          </div>
-          <div class="excel__toolbar-button button">
-            <span class="material-icons"> format_underlined </span>
-          </div>
-        </div>
-
-        <div class="excel__formula">
-          <div class="excel__formula-icon">fx</div>
-          <div class="excel__formula-input" contenteditable spellcheck="false"></div>
-        </div>
-
-        <div class="excel__table">
-          <div class="excel__table-row row">
-            <div class="row__info"></div>
-
-            <div class="row__data">
-              <div class="column">A</div>
-              <div class="column">B</div>
-              <div class="column">C</div>
-              <div class="column">A</div>
-              <div class="column">B</div>
-              <div class="column">C</div>
-              <div class="column">A</div>
-              <div class="column">B</div>
-              <div class="column">C</div>
-              <div class="column">A</div>
-              <div class="column">B</div>
-              <div class="column">C</div>
-              <div class="column">A</div>
-              <div class="column">B</div>
-              <div class="column">C</div>
-              <div class="column">A</div>
-              <div class="column">B</div>
-              <div class="column">C</div>
-              <div class="column">A</div>
-            </div>
+        <div class="dashboard__list dashboard__wrapper">
+          <div class="dashboard__list-header">
+            <span>Название</span>
+            <span>Дата открытия</span>
           </div>
 
-          <div class="row">
-            <div class="row__info">1</div>
-
-            <div class="row__data">
-              <div class="cell selected" contenteditable>1</div>
-              <div class="cell" contenteditable>2</div>
-              <div class="cell" contenteditable>3</div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="row__info">2</div>
-
-            <div class="row__data">
-              <div class="cell">1</div>
-              <div class="cell">2</div>
-              <div class="cell">3</div>
-            </div>
-          </div>
+          <ul class="dashboard__list-ul">
+            <li class="dashboard__record">
+              <a href="#">Таблица номер 1</a>
+              <strong>26.10.2020</strong>
+            </li>
+            <li class="dashboard__record">
+              <a href="#">Таблица номер 1</a>
+              <strong>26.10.2020</strong>
+            </li>
+            <li class="dashboard__record">
+              <a href="#">Таблица номер 1</a>
+              <strong>26.10.2020</strong>
+            </li>
+            <li class="dashboard__record">
+              <a href="#">Таблица номер 1</a>
+              <strong>26.10.2020</strong>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
