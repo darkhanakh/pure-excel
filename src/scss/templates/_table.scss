@@ -1,0 +1,64 @@
+.excel__table {
+  position: absolute;
+  top: 0;
+  left: 0;
+  top: $header-height + $toolbar-height + $formula-height;
+  overflow-x: auto;
+  padding-bottom: 2px;
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    min-height: 20px;
+    height: $row-height;
+    &__info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-width: $info-cell-width;
+      height: 100%;
+      border: 1px solid $border-color;
+      background: #f8f9fa;
+      border-top: none;
+    }
+    &__data {
+      display: flex;
+    }
+  }
+
+  .column {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f8f9fa;
+    min-width: 40px;
+    width: $cell-width;
+    border: 1px solid $border-color;
+    border-top: none;
+    border-left: none;
+    height: 100%;
+  }
+
+  .cell {
+    min-width: 40px;
+    color: #000;
+    width: $cell-width;
+    padding: 5px;
+    height: 100%;
+    border: 1px solid #e2e3e3;
+    border-top: none;
+    border-left: none;
+    white-space: nowrap;
+    outline: none;
+
+    // &:focus {
+    //   border: 2px solid #1a73e8;
+    // }
+
+    &.selected {
+      border: none;
+      outline: 2px solid #3c74ff;
+      z-index: 2;
+    }
+  }
+}
