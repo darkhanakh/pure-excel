@@ -17,6 +17,8 @@
         "require-jsdoc":"off",
         "no-unused-vars": "warn",
         "no-trailing-spaces": "off",
-        "space-before-blocks":"warn"
+        "space-before-blocks":"warn",
+        "max-len": "off",
+        "no-debugger": "off"
     }
 }
