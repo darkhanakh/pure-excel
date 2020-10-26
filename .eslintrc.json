@@ -13,6 +13,9 @@
         "semi":"warn",
         "object-curly-spacing":"off",
         "comma-dangle":"off",
-        "linebreak-style":"off"
+        "linebreak-style":"off",
+        "require-jsdoc":"off",
+        "no-unused-vars": "warn",
+        "no-trailing-spaces": "off"
     }
 }
