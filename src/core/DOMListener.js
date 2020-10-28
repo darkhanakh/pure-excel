@@ -1,5 +1,7 @@
 'use strict';
 
+import { capitalize } from './utils';
+
 export default class DOMListener {
   constructor($root, listeners = []) {
     if (!$root) {
@@ -10,8 +12,25 @@ export default class DOMListener {
   }
 
   createDOMListeners() {
-    console.log(this.listeners);
+    this.listeners.forEach((listener) => {
+      const method = getMethodName(listener);
+      /* 
+      root обьект без метода addEventListener и я прописал метод on 
+      что копирует функционал метода addEventListener это я смог реализовать 
+      потомучто у обьекта $root есть нативный элемент $el у которого присутсвует вышесказанный метод 
+      */
+      if (!this[method]) {
+        throw new Error(`No such method ${method} in Component ${this.name}`);
+      }
+      this.$root.on(listener, this[method].bind(this));
+    });
   }
 
-  removeDOMListeners() {}
+  removeDOMListeners() {
+    // realize
+  }
+}
+
+function getMethodName(eventType) {
+  return `on${capitalize(eventType)}`;
 }

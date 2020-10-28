@@ -12,12 +12,12 @@ export default class Formula extends ExcelComponent {
 
   toHTML() {
     return `
-    <div class="excel__formula-icon">fx</div>
-    <div class="excel__formula-input" contenteditable spellcheck="false"></div>
+      <div class="excel__formula-icon">fx</div>
+      <div class="excel__formula-input" contenteditable spellcheck="false"></div>
     `;
   }
 
   onInput(e) {
-    console.log('Formula: On Input', e);
+    console.log('Formula: On Input', e.target.textContent.trim());
   }
 }

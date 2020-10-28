@@ -31,6 +31,10 @@ class Dom {
     }
     return this;
   }
+
+  on(eventType, cb) {
+    this.$el.addEventListener(eventType, cb);
+  }
 }
 
 export default function $(selector) {
