@@ -19,6 +19,7 @@
         "no-trailing-spaces": "off",
         "space-before-blocks":"warn",
         "max-len": "off",
-        "no-debugger": "off"
+        "no-debugger": "off",
+        "quotes":"off"
     }
 }
