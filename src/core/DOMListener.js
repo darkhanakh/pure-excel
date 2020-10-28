@@ -22,12 +22,16 @@ export default class DOMListener {
       if (!this[method]) {
         throw new Error(`No such method ${method} in Component ${this.name}`);
       }
-      this.$root.on(listener, this[method].bind(this));
+      this[method] = this[method].bind(this);
+      this.$root.on(listener, this[method]);
     });
   }
 
   removeDOMListeners() {
-    // realize
+    this.listeners.forEach((listener) => {
+      const method = getMethodName(listener);
+      this.$root.off(listener, this[method]);
+    });
   }
 }
 
