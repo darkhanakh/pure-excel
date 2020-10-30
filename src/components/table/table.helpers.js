@@ -15,14 +15,14 @@ const createCol = (col) => {
   return /*html*/ `
     <div class="column">
       ${col}
-      <div class="col-resize"></div>
+      <div class="col-resize" data-resize="col"></div>
     </div>
     
   `;
 };
 
 const createRow = (i, content) => {
-  const resizer = i ? /*html*/ `<div class="row-resize"></div>` : '';
+  const resizer = i ? /*html*/ `<div class="row-resize" data-resize="row"></div>` : '';
 
   return /*html*/ `
   <div class="excel__table-row row">
