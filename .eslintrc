@@ -21,6 +21,8 @@
         "max-len": "off",
         "no-debugger": "off",
         "quotes":"off",
-        "spaced-comment":"off"
+        "spaced-comment":"off",
+        "one-var": "off", 
+        "indent":"off"
     }
 }
