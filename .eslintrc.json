@@ -20,6 +20,7 @@
         "space-before-blocks":"warn",
         "max-len": "off",
         "no-debugger": "off",
-        "quotes":"off"
+        "quotes":"off",
+        "spaced-comment":"off"
     }
 }
