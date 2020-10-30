@@ -17,7 +17,7 @@ const createCol = (col, index) => /*html*/ `
   `;
 
 const createRow = (i, content) => /*html*/ `
-  <div class="excel__table-row row">
+  <div class="row" data-type="resizable">
     <div class="row__info">
       ${i}
       ${i ? /*html*/ `<div class="row-resize" data-resize="row"></div>` : ''}
