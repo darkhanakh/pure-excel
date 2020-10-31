@@ -20,27 +20,52 @@ export default class Table extends ExcelComponent {
     if (e.target.dataset.resize) {
       const $resizer = $(e.target),
         $parent = $resizer.parent('[data-type="resizable"]'),
+        type = $resizer.dataset.resize,
         coordinates = $parent.getCoordinates(),
-        $cells = this.$root.findAll(`[data-col="${$parent.dataset.col}"]`),
-        type = $resizer.dataset.resize;
+        sideProp = type === 'col' ? 'bottom' : 'right';
+
+      let value;
+
+      $resizer.css({
+        opacity: 1,
+        [sideProp]: '-5000px',
+      });
 
       document.onmousemove = (event) => {
         if (type === 'col') {
-          $parent.css({
-            width: `${coordinates.width + (event.pageX - coordinates.right)}px`,
-          });
+          const delta = event.pageX - coordinates.right;
+          value = coordinates.width + delta;
 
-          $cells.forEach(
-            (el) => (el.style.width = `${coordinates.width + (event.pageX - coordinates.right)}px`),
-          );
+          $resizer.css({ right: -delta + 'px' });
         } else {
           const delta = event.pageY - coordinates.bottom;
-          $parent.css({
-            height: `${coordinates.height + delta}px`,
-          });
+          value = coordinates.height + delta;
+          $resizer.css({ bottom: -delta + 'px' });
         }
       };
-      document.onmouseup = () => (document.onmousemove = null);
+      document.onmouseup = () => {
+        document.onmousemove = null;
+        document.onmouseup = null;
+
+        if (type === 'col') {
+          $parent.css({
+            width: `${value}px`,
+          });
+          this.$root
+            .findAll(`[data-col="${$parent.dataset.col}"]`)
+            .forEach((el) => (el.style.width = `${value}px`));
+        } else {
+          $parent.css({
+            height: `${value}px`,
+          });
+        }
+
+        $resizer.css({
+          opacity: 0,
+          bottom: 0,
+          right: 0,
+        });
+      };
     }
   }
 }

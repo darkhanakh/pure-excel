@@ -68,9 +68,11 @@ $blue: #3c74ff;
     right: 0;
     bottom: 0;
     background: $blue;
+    z-index: 1000;
+    user-select: none;
 
     &:hover {
-      opacity: 1;
+      opacity: 1 !important;
     }
   }
 
@@ -83,25 +85,6 @@ $blue: #3c74ff;
       cursor: col-resize;
       &::before {
         display: none;
-      }
-    }
-  }
-
-  .resize-active {
-    position: absolute;
-    &::before {
-      content: '';
-      display: none;
-      position: absolute;
-      height: 100vh;
-      width: 1px;
-      background: $blue;
-      left: 2px;
-    }
-
-    &:hover {
-      &::before {
-        display: block;
       }
     }
   }
