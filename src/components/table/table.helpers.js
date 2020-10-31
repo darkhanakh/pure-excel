@@ -28,4 +28,8 @@ const createRow = (i, content) => /*html*/ `
 
 const toChar = (_, index) => String.fromCharCode(CODES.A + index);
 
-export { CODES, createCell, createCol, createRow, toChar };
+const shouldResize = (e) => {
+  return e.target.dataset.resize;
+};
+
+export { CODES, createCell, createCol, createRow, toChar, shouldResize };
