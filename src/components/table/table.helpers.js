@@ -5,27 +5,31 @@ const CODES = {
   Z: 91,
 };
 
-const createCell = () => {
-  return `
-    <div class="cell" contenteditable></div>
+const createCell = (_, col) => /*html*/ `
+    <div class="cell" contenteditable data-col="${col + 1}"></div>
   `;
-};
 
-const createCol = (col) => {
-  return `
-    <div class="column">${col}</div>
+const createCol = (col, index) => /*html*/ `
+    <div class="column" data-type="resizable" data-col="${index + 1}">
+      ${col}
+      <div class="col-resize" data-resize="col"></div>
+    </div>
   `;
-};
 
-const createRow = (i, content) => {
-  return `
-  <div class="excel__table-row row">
-    <div class="row__info">${i}</div>
+const createRow = (i, content) => /*html*/ `
+  <div class="row" data-type="resizable">
+    <div class="row__info">
+      ${i}
+      ${i ? /*html*/ `<div class="row-resize" data-resize="row"></div>` : ''}
+    </div>
     <div class="row__data">${content}</div>
   </div>
   `;
-};
 
 const toChar = (_, index) => String.fromCharCode(CODES.A + index);
 
-export { CODES, createCell, createCol, createRow, toChar };
+const shouldResize = (e) => {
+  return e.target.dataset.resize;
+};
+
+export { CODES, createCell, createCol, createRow, toChar, shouldResize };

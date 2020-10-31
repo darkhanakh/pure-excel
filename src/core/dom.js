@@ -39,6 +39,32 @@ class Dom {
   off(eventType, cb) {
     this.$el.removeEventListener(eventType, cb);
   }
+
+  parent(selector) {
+    return $(this.$el.closest(selector));
+  }
+
+  getCoordinates() {
+    return this.$el.getBoundingClientRect();
+  }
+
+  get dataset() {
+    return this.$el.dataset;
+  }
+
+  findAll(sel) {
+    return this.$el.querySelectorAll(sel);
+  }
+
+  /* 
+    {
+      width: 100%,
+      bgColor: red
+    }
+  */
+  css(styles = {}) {
+    Object.keys(styles).forEach((key) => (this.$el.style[key] = styles[key]));
+  }
 }
 
 export default function $(selector) {
