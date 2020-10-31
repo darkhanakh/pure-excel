@@ -55,6 +55,16 @@ class Dom {
   findAll(sel) {
     return this.$el.querySelectorAll(sel);
   }
+
+  /* 
+    {
+      width: 100%,
+      bgColor: red
+    }
+  */
+  css(styles = {}) {
+    Object.keys(styles).forEach((key) => (this.$el.style[key] = styles[key]));
+  }
 }
 
 export default function $(selector) {
