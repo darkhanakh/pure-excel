@@ -52,6 +52,10 @@ class Dom {
     return this.$el.dataset;
   }
 
+  find(sel) {
+    return $(this.$el.querySelector(sel));
+  }
+
   findAll(sel) {
     return this.$el.querySelectorAll(sel);
   }
@@ -64,6 +68,14 @@ class Dom {
   */
   css(styles = {}) {
     Object.keys(styles).forEach((key) => (this.$el.style[key] = styles[key]));
+  }
+
+  addClass(...className) {
+    this.$el.classList.add(...className);
+  }
+
+  removeClass(...className) {
+    this.$el.classList.remove(...className);
   }
 }
 

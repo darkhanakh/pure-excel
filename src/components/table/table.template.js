@@ -10,9 +10,9 @@ export default function createTable(rowsCount = 25) {
 
   rows.push(createRow('', cols));
 
-  for (let i = 0; i <= rowsCount; i++) {
-    const cells = new Array(colsCount).fill('').map(createCell).join('');
-    rows.push(createRow(i + 1, cells));
+  for (let row = 0; row <= rowsCount; row++) {
+    const cells = new Array(colsCount).fill('').map(createCell(row)).join('');
+    rows.push(createRow(row + 1, cells));
   }
 
   return rows.join('');

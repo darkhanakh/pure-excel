@@ -5,9 +5,15 @@ const CODES = {
   Z: 91,
 };
 
-const createCell = (_, col) => /*html*/ `
-    <div class="cell" contenteditable data-col="${col + 1}"></div>
-  `;
+// const createCell = (_, col) => /*html*/ `
+//     <div class="cell" contenteditable data-col="${col + 1}"></div>
+//   `;
+
+const createCell = (row) => {
+  return (_, col) => /*html*/ `
+      <div class="cell" contenteditable data-col="${col + 1}" data-id="${row + 1}:${col + 1}"></div>
+    `;
+};
 
 const createCol = (col, index) => /*html*/ `
     <div class="column" data-type="resizable" data-col="${index + 1}">
