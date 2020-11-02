@@ -1,4 +1,5 @@
 'use strict';
+import { range } from '@core/utils';
 
 const CODES = {
   A: 65,
@@ -46,4 +47,16 @@ const shouldResize = (e) => {
 
 const isCell = (e) => e.target.dataset.type === 'cell';
 
-export { CODES, createCell, createCol, createRow, toChar, shouldResize, isCell };
+const matrix = ($target, $current) => {
+  const target = $target.id(true);
+  const current = $current.id(true);
+  const cols = range(current.col, target.col);
+  const rows = range(current.row, target.row);
+
+  return cols.reduce((acc, col) => {
+    rows.forEach((row) => acc.push(`${row}:${col}`));
+    return acc;
+  }, []);
+};
+
+export { CODES, createCell, createCol, createRow, toChar, shouldResize, isCell, matrix };

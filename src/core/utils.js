@@ -5,4 +5,11 @@ function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-export { capitalize };
+const range = (s, e) => {
+  if (s > e) {
+    [e, s] = [s, e];
+  }
+  return new Array(e - s + 1).fill('').map((_, index) => index + s);
+};
+
+export { capitalize, range };
