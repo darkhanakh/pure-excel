@@ -59,4 +59,34 @@ const matrix = ($target, $current) => {
   }, []);
 };
 
-export { CODES, createCell, createCol, createRow, toChar, shouldResize, isCell, matrix };
+cosnt nextSelector = (key, { col, row }) => {
+  const MIN_VALUE = 1;
+  switch (key) {
+    case 'Enter':
+    case 'ArrowDown':
+      row++;
+      break;
+    case 'Tab':
+    case 'ArrowRight':
+      col++;
+      break;
+    case 'ArrowLeft':
+      if (col - 1 < MIN_VALUE) {
+        col = MIN_VALUE;
+      } else {
+        col--;
+      }
+      break;
+    case 'ArrowUp':
+      if (row - 1 < MIN_VALUE) {
+        row = MIN_VALUE;
+      } else {
+        row--;
+      }
+      break;
+  }
+
+  return `[data-id="${row}:${col}"]`;
+}
+
+export { CODES, createCell, createCol, createRow, toChar, shouldResize, isCell, matrix, nextSelector };

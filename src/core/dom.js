@@ -95,6 +95,11 @@ class Dom {
     }
     return this.dataset.id;
   }
+
+  focus() {
+    this.$el.focus();
+    return this;
+  }
 }
 
 export default function $(selector) {
