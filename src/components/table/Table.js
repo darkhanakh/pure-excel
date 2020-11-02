@@ -1,8 +1,9 @@
 import ExcelComponent from '@core/ExcelComponent';
 import createTable from './table.template';
 import resizeHandler from './table.resizeHandler';
-import { shouldResize } from './table.helpers';
+import { isCell, shouldResize } from './table.helpers';
 import TableSelection from './TableSelection';
+import $ from '@core/dom';
 
 export default class Table extends ExcelComponent {
   static className = 'excel__table';
@@ -10,7 +11,7 @@ export default class Table extends ExcelComponent {
   constructor($root) {
     super($root, {
       name: 'Table',
-      listeners: ['mousedown'],
+      listeners: ['mousedown', 'click'],
     });
   }
 
@@ -32,6 +33,13 @@ export default class Table extends ExcelComponent {
   onMousedown(e) {
     if (shouldResize(e)) {
       resizeHandler(this.$root, e);
+    }
+  }
+
+  onClick(e) {
+    if (isCell(e)) {
+      const target = $(e.target);
+      this.selection.select(target);
     }
   }
 }

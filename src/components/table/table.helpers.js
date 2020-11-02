@@ -11,7 +11,13 @@ const CODES = {
 
 const createCell = (row) => {
   return (_, col) => /*html*/ `
-      <div class="cell" contenteditable data-col="${col + 1}" data-id="${row + 1}:${col + 1}"></div>
+  <div 
+    class="cell" 
+    contenteditable 
+    data-col="${col + 1}" 
+    data-id="${row + 1}:${col + 1}" 
+    data-type="cell">
+  </div>
     `;
 };
 
@@ -38,4 +44,6 @@ const shouldResize = (e) => {
   return e.target.dataset.resize;
 };
 
-export { CODES, createCell, createCol, createRow, toChar, shouldResize };
+const isCell = (e) => e.target.dataset.type === 'cell';
+
+export { CODES, createCell, createCol, createRow, toChar, shouldResize, isCell };

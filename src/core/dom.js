@@ -77,6 +77,13 @@ class Dom {
   removeClass(...className) {
     this.$el.classList.remove(...className);
   }
+
+  hasClass(sel) {
+    if (this.$el.classList.contains(sel)) {
+      return true;
+    }
+    return false;
+  }
 }
 
 export default function $(selector) {
