@@ -3,10 +3,11 @@ import ExcelComponent from '@core/ExcelComponent';
 export default class Formula extends ExcelComponent {
   static className = 'excel__formula';
 
-  constructor($root) {
+  constructor($root, options) {
     super($root, {
       name: 'Formula',
-      listeners: [],
+      listeners: ['input'],
+      ...options,
     });
   }
 
@@ -15,5 +16,10 @@ export default class Formula extends ExcelComponent {
       <div class="excel__formula-icon">fx</div>
       <div class="excel__formula-input" contenteditable spellcheck="false"></div>
     `;
+  }
+
+  onInput(e) {
+    const text = e.target.textContent.trim();
+    this.observer.trigger('its working', text);
   }
 }

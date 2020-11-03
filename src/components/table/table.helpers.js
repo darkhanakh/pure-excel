@@ -59,7 +59,7 @@ const matrix = ($target, $current) => {
   }, []);
 };
 
-cosnt nextSelector = (key, { col, row }) => {
+const nextSelector = (key, { col, row }) => {
   const MIN_VALUE = 1;
   switch (key) {
     case 'Enter':
@@ -87,6 +87,16 @@ cosnt nextSelector = (key, { col, row }) => {
   }
 
   return `[data-id="${row}:${col}"]`;
-}
+};
 
-export { CODES, createCell, createCol, createRow, toChar, shouldResize, isCell, matrix, nextSelector };
+export {
+  CODES,
+  createCell,
+  createCol,
+  createRow,
+  toChar,
+  shouldResize,
+  isCell,
+  matrix,
+  nextSelector,
+};
