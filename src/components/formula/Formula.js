@@ -19,7 +19,8 @@ export default class Formula extends ExcelComponent {
   }
 
   onInput(e) {
+    e.preventDefault();
     const text = e.target.textContent.trim();
-    this.observer.trigger('its working', text);
+    this.$trigger('formula:input', text);
   }
 }

@@ -30,7 +30,7 @@ export default class Table extends ExcelComponent {
     const $cell = this.$root.find('[data-id="1:1"]');
     this.selection.select($cell);
 
-    this.observer.subscribe('its working', (data) => {
+    this.$on('formula:input', (data) => {
       this.selection.current.text(data);
     });
   }
