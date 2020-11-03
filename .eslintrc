@@ -23,6 +23,7 @@
         "quotes":"off",
         "spaced-comment":"off",
         "one-var": "off", 
-        "indent":"off"
+        "indent":"off", 
+        "no-self-assign":"off"
     }
 }

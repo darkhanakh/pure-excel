@@ -1,4 +1,5 @@
 import ExcelComponent from '@core/ExcelComponent';
+import $ from '@core/dom';
 
 export default class Formula extends ExcelComponent {
   static className = 'excel__formula';
@@ -6,21 +7,42 @@ export default class Formula extends ExcelComponent {
   constructor($root, options) {
     super($root, {
       name: 'Formula',
-      listeners: ['input'],
+      listeners: ['input', 'keydown'],
       ...options,
     });
   }
 
   toHTML() {
-    return `
+    return /*html*/ `
       <div class="excel__formula-icon">fx</div>
-      <div class="excel__formula-input" contenteditable spellcheck="false"></div>
+      <div class="excel__formula-input" id="formula-input" contenteditable spellcheck="false"></div>
     `;
   }
 
+  init() {
+    super.init();
+
+    this.formula = this.$root.find('#formula-input');
+
+    this.$on('table:select', ($cell) => {
+      this.formula.text($cell.text());
+    });
+
+    this.$on('table:input', ($target) => {
+      this.formula.text($target.text());
+    });
+  }
+
   onInput(e) {
-    e.preventDefault();
-    const text = e.target.textContent.trim();
-    this.$trigger('formula:input', text);
+    this.$trigger('formula:input', $(e.target).text());
+  }
+
+  onKeydown(e) {
+    const keys = ['Enter', 'Tab'];
+    if (keys.includes(e.key)) {
+      e.preventDefault();
+
+      this.$trigger('formula:done');
+    }
   }
 }
