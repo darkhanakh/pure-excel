@@ -6,24 +6,24 @@ const CODES = {
   Z: 91,
 };
 
-// const createCell = (_, col) => /*html*/ `
-//     <div class="cell" contenteditable data-col="${col + 1}"></div>
-//   `;
+const DEFAULT_WIDTH = 120;
 
-const createCell = (row) => {
+const createCell = (state, row) => {
   return (_, col) => /*html*/ `
-  <div 
-    class="cell" 
-    contenteditable 
-    data-col="${col + 1}" 
-    data-id="${row + 1}:${col + 1}" 
-    data-type="cell">
-  </div>
+    <div 
+      class="cell" 
+      contenteditable 
+      data-col="${col + 1}" 
+      data-id="${row + 1}:${col + 1}" 
+      style="width: ${getWidth(state.colState, col + 1)}px"
+      data-type="cell"
+      >
+    </div>
     `;
 };
 
-const createCol = (col, index) => /*html*/ `
-    <div class="column" data-type="resizable" data-col="${index + 1}">
+const createCol = ({ col, index, width }) => /*html*/ `
+    <div class="column" data-type="resizable" data-col="${index + 1}" style="width: ${width}px">
       ${col}
       <div class="col-resize" data-resize="col"></div>
     </div>
@@ -89,6 +89,20 @@ const nextSelector = (key, { col, row }) => {
   return `[data-id="${row}:${col}"]`;
 };
 
+function getWidth(state = {}, index) {
+  return state[index] || DEFAULT_WIDTH;
+}
+
+const withWidthFrom = (state) => {
+  return (col, index) => {
+    return {
+      col,
+      index,
+      width: getWidth(state.colState, index + 1),
+    };
+  };
+};
+
 export {
   CODES,
   createCell,
@@ -99,4 +113,6 @@ export {
   isCell,
   matrix,
   nextSelector,
+  getWidth,
+  withWidthFrom,
 };
