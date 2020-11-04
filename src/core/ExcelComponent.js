@@ -6,6 +6,8 @@ export default class ExcelComponent extends DOMListener {
     this.name = options.name || '';
     this.observer = options.observer;
     this.unsubsribers = [];
+    this.store = options.store;
+    this.storeUnsub = null;
 
     this.prepare();
   }
@@ -28,6 +30,14 @@ export default class ExcelComponent extends DOMListener {
     this.unsubsribers.push(unsub);
   }
 
+  $dispatch(action) {
+    this.store.dispatch(action);
+  }
+
+  $subscribe(cb) {
+    this.storeUnsub = this.store.subscribe(cb);
+  }
+
   init() {
     this.createDOMListeners();
   }
@@ -35,5 +45,6 @@ export default class ExcelComponent extends DOMListener {
   destroy() {
     this.removeDOMListeners();
     this.unsubsribers.forEach((fn) => fn());
+    this.storeUnsub();
   }
 }

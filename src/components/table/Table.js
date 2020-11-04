@@ -55,7 +55,7 @@ export default class Table extends ExcelComponent {
         );
         this.selection.selectGroup($selectedCells);
       } else {
-        this.selection.select($target);
+        this.selectCell($target);
       }
     }
   }
