@@ -12,4 +12,11 @@ const range = (s, e) => {
   return new Array(e - s + 1).fill('').map((_, index) => index + s);
 };
 
-export { capitalize, range };
+const storage = (key, data = null) => {
+  if (!data) {
+    return JSON.parse(localStorage.getItem(key));
+  }
+  localStorage.setItem(key, JSON.stringify(data));
+};
+
+export { capitalize, range, storage };

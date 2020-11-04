@@ -4,6 +4,7 @@ import resizeHandler from './table.resizeHandler';
 import { isCell, matrix, nextSelector, shouldResize } from './table.helpers';
 import TableSelection from './TableSelection';
 import $ from '@core/dom';
+import * as actions from '@/store/actions/actions';
 
 export default class Table extends ExcelComponent {
   static className = 'excel__table';
@@ -47,12 +48,9 @@ export default class Table extends ExcelComponent {
   async resizeTable(e) {
     try {
       const data = await resizeHandler(this.$root, e);
-      this.$dispatch({
-        type: 'TABLE_RESIZE',
-        data,
-      });
+      this.$dispatch(actions.tableResize(data));
     } catch (e) {
-      console.error('Resize error', e.message);
+      console.error('Resize error', e);
     }
   }
 

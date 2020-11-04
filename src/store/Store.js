@@ -26,20 +26,20 @@
 } */
 
 export default class Store {
+  #subscribers = [];
   constructor(rootReducer, initialState = {}) {
     this.state = rootReducer({ ...initialState }, { type: '__INIT__' });
-    this.subscribers = [];
     this.rootReducer = rootReducer;
   }
 
   subscribe(cb) {
-    this.subscribers.push(cb);
-    return () => this.subscribers.filter((l) => l !== cb);
+    this.#subscribers.push(cb);
+    return () => this.#subscribers.filter((l) => l !== cb);
   }
 
   dispatch(action) {
     this.state = this.rootReducer(this.state, action);
-    this.subscribers.forEach((listener) => {
+    this.#subscribers.forEach((listener) => {
       listener(this.state);
     });
   }
