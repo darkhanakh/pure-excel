@@ -44,9 +44,21 @@ export default class Table extends ExcelComponent {
     this.$trigger('table:select', $cell);
   }
 
+  async resizeTable(e) {
+    try {
+      const data = await resizeHandler(this.$root, e);
+      this.$dispatch({
+        type: 'TABLE_RESIZE',
+        data,
+      });
+    } catch (e) {
+      console.error('Resize error', e.message);
+    }
+  }
+
   onMousedown(e) {
     if (shouldResize(e)) {
-      resizeHandler(this.$root, e);
+      this.resizeTable(e);
     } else if (isCell(e)) {
       const $target = $(e.target);
       if (e.shiftKey) {

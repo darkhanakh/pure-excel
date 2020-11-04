@@ -4,11 +4,11 @@ import Header from './components/header/Header';
 import Toolbar from './components/toolbar/Toolbar';
 import Formula from './components/formula/Formula';
 import Table from './components/table/Table';
-import rootReducer from './store/rootReducer.reducer';
-import Store from './core/Store';
+import rootReducer from './store/reducers/rootReducer.reducer';
+import Store from './store/Store';
 
 const store = new Store(rootReducer, {
-  tableTitle: 'lalal',
+  colState: {},
 });
 
 const excel = new Excel('#app', {
