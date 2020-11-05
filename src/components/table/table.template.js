@@ -13,11 +13,11 @@ export default function createTable(rowsCount = 25, state = {}) {
     .map(createCol)
     .join('');
 
-  rows.push(createRow('', cols));
+  rows.push(createRow('', cols, {}));
 
   for (let row = 0; row <= rowsCount; row++) {
     const cells = new Array(colsCount).fill('').map(createCell(state, row)).join('');
-    rows.push(createRow(row + 1, cells));
+    rows.push(createRow(row + 1, cells, state.rowState));
   }
 
   return rows.join('');

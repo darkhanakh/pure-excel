@@ -6,9 +6,11 @@ import Formula from './components/formula/Formula';
 import Table from './components/table/Table';
 import rootReducer from './store/reducers/rootReducer.reducer';
 import Store from './store/Store';
-import { storage } from './core/utils';
+import { storage } from '@core/utils';
+import { initialState } from './store/actions/initialState.action';
 
-const store = new Store(rootReducer, storage('excel-state'));
+const store = new Store(rootReducer, initialState);
+console.log('store: ', store);
 
 store.subscribe((state) => {
   console.log('App state', state);

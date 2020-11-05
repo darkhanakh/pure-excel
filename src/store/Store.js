@@ -27,7 +27,7 @@
 
 export default class Store {
   #subscribers = [];
-  constructor(rootReducer, initialState = {}) {
+  constructor(rootReducer, initialState) {
     this.state = rootReducer({ ...initialState }, { type: '__INIT__' });
     this.rootReducer = rootReducer;
   }

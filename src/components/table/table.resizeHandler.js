@@ -48,7 +48,8 @@ export default function resizeHandler($root, e) {
 
       resolve({
         value,
-        id: type === 'col' ? $parent.dataset.col : null,
+        type,
+        id: $parent.dataset[type],
       });
 
       $resizer.css({

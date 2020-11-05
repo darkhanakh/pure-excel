@@ -7,6 +7,7 @@ const CODES = {
 };
 
 const DEFAULT_WIDTH = 120;
+const DEFAULT_HEIGHT = 24;
 
 const createCell = (state, row) => {
   return (_, col) => /*html*/ `
@@ -29,8 +30,10 @@ const createCol = ({ col, index, width }) => /*html*/ `
     </div>
   `;
 
-const createRow = (i, content) => /*html*/ `
-  <div class="row" data-type="resizable">
+const createRow = (i, content, state) => {
+  const height = getHeight(state, i);
+  return /*html*/ `
+  <div class="row" data-type="resizable" data-row = "${i}" style="height: ${height}">
     <div class="row__info">
       ${i}
       ${i ? /*html*/ `<div class="row-resize" data-resize="row"></div>` : ''}
@@ -38,6 +41,7 @@ const createRow = (i, content) => /*html*/ `
     <div class="row__data">${content}</div>
   </div>
   `;
+};
 
 const toChar = (_, index) => String.fromCharCode(CODES.A + index);
 
@@ -91,6 +95,10 @@ const nextSelector = (key, { col, row }) => {
 
 function getWidth(state = {}, index) {
   return state[index] || DEFAULT_WIDTH;
+}
+
+function getHeight(state, index) {
+  return (state[index] || DEFAULT_HEIGHT) + 'px';
 }
 
 const withWidthFrom = (state) => {
