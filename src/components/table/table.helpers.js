@@ -10,17 +10,21 @@ const DEFAULT_WIDTH = 120;
 const DEFAULT_HEIGHT = 24;
 
 const createCell = (state, row) => {
-  return (_, col) => /*html*/ `
+  return (_, col) => {
+    const id = `${row + 1}:${col + 1}`;
+    const data = state.dataState[id] || '';
+    return /*html*/ `
     <div 
       class="cell" 
       contenteditable 
       data-col="${col + 1}" 
-      data-id="${row + 1}:${col + 1}" 
+      data-id="${id}" 
       style="width: ${getWidth(state.colState, col + 1)}px"
       data-type="cell"
-      >
+      > ${data}
     </div>
     `;
+  };
 };
 
 const createCol = ({ col, index, width }) => /*html*/ `
