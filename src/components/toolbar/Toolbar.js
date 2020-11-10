@@ -1,4 +1,6 @@
 import ExcelComponent from '@core/ExcelComponent';
+import createToolbar from "@/components/toolbar/toolbar.template";
+import $ from "@core/dom";
 
 export default class Toolbar extends ExcelComponent {
   static className = 'excel__toolbar';
@@ -6,31 +8,20 @@ export default class Toolbar extends ExcelComponent {
   constructor($root, options) {
     super($root, {
       name: 'Toolbar',
-      listeners: [],
-      ...options,
+      listeners: ['click'],
+      ...options
     });
   }
 
   toHTML() {
-    return /*html*/ `
-      <div class="excel__toolbar-button button">
-      <span class="material-icons"> format_align_left </span>
-      </div>
-      <div class="excel__toolbar-button button">
-        <span class="material-icons"> format_align_justify </span>
-      </div>
-      <div class="excel__toolbar-button button">
-        <span class="material-icons"> format_align_right </span>
-      </div>
-      <div class="excel__toolbar-button button">
-        <span class="material-icons"> format_bold </span>
-      </div>
-      <div class="excel__toolbar-button button">
-        <span class="material-icons"> format_italic</span>
-      </div>
-      <div class="excel__toolbar-button button">
-        <span class="material-icons"> format_underlined </span>
-      </div>
-    `;
+    return createToolbar();
+  }
+
+  onClick(e) {
+    const $target = $(e.target);
+    const $parent = $target.parent('[data-type="button"]');
+    if ($parent) {
+      console.log($parent.dataset.value);
+    }
   }
 }
