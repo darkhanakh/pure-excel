@@ -19,4 +19,11 @@ const storage = (key, data = null) => {
   localStorage.setItem(key, JSON.stringify(data));
 };
 
-export { capitalize, range, storage };
+function isEqual(a, b) {
+  if (typeof a === 'object' && b === 'object') {
+    return JSON.stringify(a) === JSON.stringify(b);
+  }
+  return a === b;
+}
+
+export { capitalize, range, storage, isEqual };

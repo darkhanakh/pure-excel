@@ -25,6 +25,6 @@
         "spaced-comment":"off",
         "one-var": "off", 
         "indent":"off", 
-        "no-self-assign":"off", 
+        "no-self-assign":"off"
     }
 }

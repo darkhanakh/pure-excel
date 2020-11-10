@@ -10,10 +10,8 @@ import { storage } from '@core/utils';
 import { initialState } from './store/actions/initialState.action';
 
 const store = new Store(rootReducer, initialState);
-console.log('store: ', store);
 
 store.subscribe((state) => {
-  console.log('App state', state);
   storage('excel-state', state);
 });
 
