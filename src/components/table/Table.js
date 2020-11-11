@@ -6,6 +6,7 @@ import TableSelection from './TableSelection';
 import $ from '@core/dom';
 import * as actions from '@/store/actions/actions';
 import { defaultStyles } from '@/constants';
+import parse from "@core/parse";
 
 export default class Table extends ExcelComponent {
   static className = 'excel__table';
@@ -33,7 +34,9 @@ export default class Table extends ExcelComponent {
     this.selectCell($cell);
 
     this.$on('formula:input', (data) => {
-      this.selection.current.text(data);
+      this.selection.current
+          .attr('data-value', data)
+          .text(parse(data));
       this.updateTextInStore(data);
     });
 

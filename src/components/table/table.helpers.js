@@ -1,6 +1,7 @@
 'use strict';
 import { range, toInlineStyles } from '@core/utils';
 import { defaultStyles } from '@/constants';
+import parse from '@core/parse';
 
 const CODES = {
   A: 65,
@@ -27,7 +28,8 @@ const createCell = (state, row) => {
       data-id="${id}" 
       style="${styles}; width: ${getWidth(state.colState, col + 1)}px"
       data-type="cell"
-      > ${data}
+      data-value="${data || ''}"
+      > ${parse(data) || ''}
     </div>
     `;
   };

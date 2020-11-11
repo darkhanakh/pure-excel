@@ -26,7 +26,7 @@ export default class Formula extends ExcelComponent {
     this.formula = this.$root.find('#formula-input');
 
     this.$on('table:select', ($cell) => {
-      this.formula.text($cell.text());
+      this.formula.text($cell.dataset.value);
     });
   }
 
@@ -35,7 +35,8 @@ export default class Formula extends ExcelComponent {
   }
 
   onInput(e) {
-    this.$trigger('formula:input', $(e.target).text());
+    const text = $(e.target).text();
+    this.$trigger('formula:input', text);
   }
 
   onKeydown(e) {
