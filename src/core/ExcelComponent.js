@@ -6,6 +6,9 @@ export default class ExcelComponent extends DOMListener {
     this.name = options.name || '';
     this.observer = options.observer;
     this.unsubsribers = [];
+    this.store = options.store;
+    this.subscribe = options.subscribe || [];
+    this.storeUnsub = null;
 
     this.prepare();
   }
@@ -26,6 +29,16 @@ export default class ExcelComponent extends DOMListener {
   $on(eventName, cb) {
     const unsub = this.observer.subscribe(eventName, cb);
     this.unsubsribers.push(unsub);
+  }
+
+  $dispatch(action) {
+    this.store.dispatch(action);
+  }
+
+  storeChanged() {}
+
+  isWatching(key) {
+    return this.subscribe.includes(key);
   }
 
   init() {

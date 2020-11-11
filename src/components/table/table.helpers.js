@@ -1,36 +1,53 @@
 'use strict';
-import { range } from '@core/utils';
+import { range, toInlineStyles } from '@core/utils';
+import { defaultStyles } from '@/constants';
+import parse from '@core/parse';
 
 const CODES = {
   A: 65,
   Z: 91,
 };
 
-// const createCell = (_, col) => /*html*/ `
-//     <div class="cell" contenteditable data-col="${col + 1}"></div>
-//   `;
+const DEFAULT_WIDTH = 120;
+const DEFAULT_HEIGHT = 24;
 
-const createCell = (row) => {
-  return (_, col) => /*html*/ `
-  <div 
-    class="cell" 
-    contenteditable 
-    data-col="${col + 1}" 
-    data-id="${row + 1}:${col + 1}" 
-    data-type="cell">
-  </div>
+const createCell = (state, row) => {
+  return (_, col) => {
+    const id = `${row + 1}:${col + 1}`;
+    const data = state.dataState[id] || '';
+    const styles = toInlineStyles({
+      ...defaultStyles,
+      ...state.stylesState[id],
+    });
+
+    return /*html*/ `
+    <div 
+      class="cell" 
+      contenteditable 
+      data-col="${col + 1}" 
+      data-id="${id}" 
+      style="${styles}; width: ${getWidth(state.colState, col + 1)}px"
+      data-type="cell"
+      data-value="${data || ''}"
+      > ${parse(data) || ''}
+    </div>
     `;
+  };
 };
 
-const createCol = (col, index) => /*html*/ `
-    <div class="column" data-type="resizable" data-col="${index + 1}">
+const createCol = ({ col, index, width }) => /*html*/ `
+    <div class="column" data-type="resizable" data-col="${
+      index + 1
+    }" style="width: ${width}px">
       ${col}
       <div class="col-resize" data-resize="col"></div>
     </div>
   `;
 
-const createRow = (i, content) => /*html*/ `
-  <div class="row" data-type="resizable">
+const createRow = (i, content, state) => {
+  const height = getHeight(state, i);
+  return /*html*/ `
+  <div class="row" data-type="resizable" data-row = "${i}" style="height: ${height}">
     <div class="row__info">
       ${i}
       ${i ? /*html*/ `<div class="row-resize" data-resize="row"></div>` : ''}
@@ -38,6 +55,7 @@ const createRow = (i, content) => /*html*/ `
     <div class="row__data">${content}</div>
   </div>
   `;
+};
 
 const toChar = (_, index) => String.fromCharCode(CODES.A + index);
 
@@ -89,6 +107,24 @@ const nextSelector = (key, { col, row }) => {
   return `[data-id="${row}:${col}"]`;
 };
 
+function getWidth(state = {}, index) {
+  return state[index] || DEFAULT_WIDTH;
+}
+
+function getHeight(state, index) {
+  return (state[index] || DEFAULT_HEIGHT) + 'px';
+}
+
+const withWidthFrom = (state) => {
+  return (col, index) => {
+    return {
+      col,
+      index,
+      width: getWidth(state.colState, index + 1),
+    };
+  };
+};
+
 export {
   CODES,
   createCell,
@@ -99,4 +135,6 @@ export {
   isCell,
   matrix,
   nextSelector,
+  getWidth,
+  withWidthFrom,
 };
