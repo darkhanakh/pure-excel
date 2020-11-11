@@ -19,11 +19,13 @@ const storage = (key, data = null) => {
   localStorage.setItem(key, JSON.stringify(data));
 };
 
-function isEqual(a, b) {
+const isEqual = (a, b) => {
   if (typeof a === 'object' && b === 'object') {
     return JSON.stringify(a) === JSON.stringify(b);
   }
   return a === b;
-}
+};
 
-export { capitalize, range, storage, isEqual };
+const camelCaseToDashCase = str => str.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`);
+
+export { capitalize, range, storage, isEqual, camelCaseToDashCase };

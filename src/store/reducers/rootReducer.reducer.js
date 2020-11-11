@@ -1,24 +1,26 @@
 // Чистая функция
-import { CHANGE_TEXT, TABLE_RESIZE } from '../actions/types.actions';
+import {CHANGE_TEXT, CHANGE_STYLES, TABLE_RESIZE} from "../actions/types.actions";
 export default function rootReducer(state, action) {
   let field;
-  let prevState;
-  console.log(action);
   switch (action.type) {
     case TABLE_RESIZE:
-      field = action.data.type === 'col' ? 'colState' : 'rowState';
-      prevState = state[field] || {};
-      prevState[action.data.id] = action.data.value;
-      return { ...state, [field]: prevState }; // id value type
+      field = action.data.type === "col" ? "colState" : "rowState";
+      return { ...state, [field]: value(state, field, action) }; // id value type
     case CHANGE_TEXT:
-      prevState = state['dataState'] || {};
-      prevState[action.data.id] = action.data.value;
       return {
         ...state,
         currentText: action.data.value,
-        dataState: prevState,
+        [field]: value(state, field, action),
       };
+    case CHANGE_STYLES:
+      return {...state, currentStyles: action.data};
     default:
       return state;
   }
+}
+
+function value(state, field, action) {
+  const val = state[field] || {};
+  val[action.data.id] = action.data.value;
+  return val;
 }

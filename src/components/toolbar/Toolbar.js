@@ -10,6 +10,7 @@ export default class Toolbar extends ExcelStateComponent {
     super($root, {
       name: "Toolbar",
       listeners: ["click"],
+      subscribe: ['currentStyles'],
       ...options,
     });
   }
@@ -32,14 +33,13 @@ export default class Toolbar extends ExcelStateComponent {
     if ($parent) {
       if ($parent.dataset.value) {
         const style = JSON.parse($parent.dataset.value);
-        const key = Object.keys(style)[0];
 
         this.$trigger('toolbar:applyStyle', style);
-
-        this.setState({
-          [key]: style[key],
-        });
       }
     }
+  }
+
+  storeChanged(changes) {
+    this.setState(changes.currentStyles);
   }
 }
