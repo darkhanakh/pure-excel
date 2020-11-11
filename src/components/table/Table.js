@@ -5,6 +5,7 @@ import { isCell, matrix, nextSelector, shouldResize } from './table.helpers';
 import TableSelection from './TableSelection';
 import $ from '@core/dom';
 import * as actions from '@/store/actions/actions';
+import {defaultStyles} from "@/constants";
 
 export default class Table extends ExcelComponent {
   static className = 'excel__table';
@@ -39,11 +40,16 @@ export default class Table extends ExcelComponent {
     this.$on('formula:done', () => {
       this.selection.current.focus();
     });
+
+    this.$on('toolbar:applyStyle', style => {
+      this.selection.applyStyle(style);
+    });
   }
 
   selectCell($cell) {
     this.selection.select($cell);
     this.$trigger('table:select', $cell);
+    console.log($cell.getStyles(Object.keys(defaultStyles)));
   }
 
   async resizeTable(e) {
