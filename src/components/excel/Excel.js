@@ -3,8 +3,7 @@ import Observer from '@core/Observer';
 import StoreSubscriber from '@core/StoreSubscriber';
 
 export default class Excel {
-  constructor(selector, options) {
-    this.$el = $(selector);
+  constructor(options) {
     this.components = options.components || [];
     this.observer = new Observer();
     this.store = options.store;
@@ -29,9 +28,7 @@ export default class Excel {
     return $root;
   }
 
-  render() {
-    this.$el.append(this.getRoot());
-
+  init() {
     this.subscriber.subscribeComponents(this.components);
     this.components.forEach((component) => component.init());
   }

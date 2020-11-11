@@ -1,34 +1,32 @@
 import $ from '@core/dom';
-import ActiveRoute from "@core/routes/ActiveRoute";
+// import ActiveRoute from '@core/routes/ActiveRoute';
 
 export default class Router {
-    constructor(selector, routes = {}) {
-        if (!selector) {
-            throw new Error('Selector is not provided in Router');
-        }
-        this.$placeholder = $(selector);
-        this.routes = routes;
-
-        this.changePageHandler = this.changePageHandler.bind(this);
-
-        this.init();
+  constructor(selector, routes = {}) {
+    if (!selector) {
+      throw new Error('Selector is not provided in Router');
     }
+    this.$placeholder = $(selector);
+    this.routes = routes;
 
-    init() {
-        window.addEventListener('hashchange', this.changePageHandler);
-        this.changePageHandler();
-    }
+    this.changePageHandler = this.changePageHandler.bind(this);
 
-    changePageHandler() {
-        console.log(ActiveRoute.path);
-        console.log(ActiveRoute.param);
+    this.init();
+  }
 
-        this.$placeholder.html(`
-            <h1>${ActiveRoute.path}</h1>
-        `);
-    }
+  init() {
+    window.addEventListener('hashchange', this.changePageHandler);
+    this.changePageHandler();
+  }
 
-    destroy() {
-        window.removeEventListener('hashchange', this.changePageHandler);
-    }
+  changePageHandler() {
+    const Page = this.routes.excel;
+    const page = new Page();
+    this.$placeholder.append(page.getRoot());
+    page.afterRender();
+  }
+
+  destroy() {
+    window.removeEventListener('hashchange', this.changePageHandler);
+  }
 }

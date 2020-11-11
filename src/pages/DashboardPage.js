@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <div class="dashboard">
+import Page from '@core/Page';
+import $ from '@core/dom';
+
+export default class DashboardPage extends Page {
+  getRoot() {
+    return $.create('div', 'dashboard').html(/*html*/ `
       <header class="dashboard__header">
         <h1 class="dashboard__header-title">Excel Dashboard</h1>
       </header>
@@ -45,6 +42,6 @@
           </li>
         </ul>
       </div>
-    </div>
-  </body>
-</html>
+    `);
+  }
+}
