@@ -1,6 +1,6 @@
-"use strict";
-import { camelCaseToDashCase, range } from "@core/utils";
-import { defaultStyles } from "@/constants";
+'use strict';
+import { range, toInlineStyles } from '@core/utils';
+import { defaultStyles } from '@/constants';
 
 const CODES = {
   A: 65,
@@ -13,10 +13,11 @@ const DEFAULT_HEIGHT = 24;
 const createCell = (state, row) => {
   return (_, col) => {
     const id = `${row + 1}:${col + 1}`;
-    const data = state.dataState[id] || "";
-    const styles = Object.keys(defaultStyles)
-      .map((key) => `${camelCaseToDashCase(key)}: ${defaultStyles[key]}`)
-      .join("; ");
+    const data = state.dataState[id] || '';
+    const styles = toInlineStyles({
+      ...defaultStyles,
+      ...state.stylesState[id],
+    });
 
     return /*html*/ `
     <div 
@@ -47,7 +48,7 @@ const createRow = (i, content, state) => {
   <div class="row" data-type="resizable" data-row = "${i}" style="height: ${height}">
     <div class="row__info">
       ${i}
-      ${i ? /*html*/ `<div class="row-resize" data-resize="row"></div>` : ""}
+      ${i ? /*html*/ `<div class="row-resize" data-resize="row"></div>` : ''}
     </div>
     <div class="row__data">${content}</div>
   </div>
@@ -60,7 +61,7 @@ const shouldResize = (e) => {
   return e.target.dataset.resize;
 };
 
-const isCell = (e) => e.target.dataset.type === "cell";
+const isCell = (e) => e.target.dataset.type === 'cell';
 
 const matrix = ($target, $current) => {
   const target = $target.id(true);
@@ -77,22 +78,22 @@ const matrix = ($target, $current) => {
 const nextSelector = (key, { col, row }) => {
   const MIN_VALUE = 1;
   switch (key) {
-    case "Enter":
-    case "ArrowDown":
+    case 'Enter':
+    case 'ArrowDown':
       row++;
       break;
-    case "Tab":
-    case "ArrowRight":
+    case 'Tab':
+    case 'ArrowRight':
       col++;
       break;
-    case "ArrowLeft":
+    case 'ArrowLeft':
       if (col - 1 < MIN_VALUE) {
         col = MIN_VALUE;
       } else {
         col--;
       }
       break;
-    case "ArrowUp":
+    case 'ArrowUp':
       if (row - 1 < MIN_VALUE) {
         row = MIN_VALUE;
       } else {
@@ -109,7 +110,7 @@ function getWidth(state = {}, index) {
 }
 
 function getHeight(state, index) {
-  return (state[index] || DEFAULT_HEIGHT) + "px";
+  return (state[index] || DEFAULT_HEIGHT) + 'px';
 }
 
 const withWidthFrom = (state) => {

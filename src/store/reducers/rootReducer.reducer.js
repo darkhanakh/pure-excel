@@ -1,12 +1,16 @@
 // Чистая функция
-import {CHANGE_TEXT, CHANGE_STYLES, TABLE_RESIZE} from "../actions/types.actions";
+import {CHANGE_TEXT, CHANGE_STYLES, TABLE_RESIZE, APPLY_STYLE, CHANGE_TITLE} from "../actions/types.actions";
+import {toInlineStyles} from "@core/utils";
 export default function rootReducer(state, action) {
-  let field;
+  let field,
+      val;
+  console.log('action', action);
   switch (action.type) {
     case TABLE_RESIZE:
       field = action.data.type === "col" ? "colState" : "rowState";
       return { ...state, [field]: value(state, field, action) }; // id value type
     case CHANGE_TEXT:
+      field = 'dataState';
       return {
         ...state,
         currentText: action.data.value,
@@ -14,6 +18,25 @@ export default function rootReducer(state, action) {
       };
     case CHANGE_STYLES:
       return {...state, currentStyles: action.data};
+    case APPLY_STYLE:
+      field = 'stylesState';
+      val = state[field] || {};
+      action.data.ids.forEach(id => {
+        val[id] = {...val[id], ...action.data.val};
+      });
+      return {
+        ...state,
+        [field]: val,
+        currentStyles: {
+          ...state.currentStyles,
+          ...action.data.val
+        }
+      };
+    case CHANGE_TITLE:
+      return {
+        ...state,
+        title: action.data
+      };
     default:
       return state;
   }

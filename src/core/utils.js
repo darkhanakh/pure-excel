@@ -1,3 +1,5 @@
+import {defaultStyles} from "@/constants";
+
 function capitalize(str) {
   if (typeof str !== 'string') {
     return '';
@@ -28,4 +30,16 @@ const isEqual = (a, b) => {
 
 const camelCaseToDashCase = str => str.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`);
 
-export { capitalize, range, storage, isEqual, camelCaseToDashCase };
+const toInlineStyles = (styles = {}) => {
+  return Object.keys(styles)
+      .map((key) => `${camelCaseToDashCase(key)}: ${styles[key]}`)
+      .join("; ");
+};
+
+const normalize = s => ({
+  ...s,
+  currentStyles: defaultStyles,
+  currentText: ''
+});
+
+export { capitalize, range, storage, isEqual, camelCaseToDashCase, toInlineStyles, normalize };
