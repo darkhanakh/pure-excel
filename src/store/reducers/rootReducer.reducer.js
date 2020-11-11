@@ -4,7 +4,7 @@ import {toInlineStyles} from "@core/utils";
 export default function rootReducer(state, action) {
   let field,
       val;
-  console.log('action', action);
+  // console.log('action', action);
   switch (action.type) {
     case TABLE_RESIZE:
       field = action.data.type === "col" ? "colState" : "rowState";

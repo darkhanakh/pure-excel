@@ -1,4 +1,4 @@
-import {defaultStyles} from "@/constants";
+import { defaultStyles } from '@/constants';
 
 function capitalize(str) {
   if (typeof str !== 'string') {
@@ -28,18 +28,41 @@ const isEqual = (a, b) => {
   return a === b;
 };
 
-const camelCaseToDashCase = str => str.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`);
+const camelCaseToDashCase = (str) =>
+  str.replace(/([A-Z])/g, (g) => `-${g[0].toLowerCase()}`);
 
 const toInlineStyles = (styles = {}) => {
   return Object.keys(styles)
-      .map((key) => `${camelCaseToDashCase(key)}: ${styles[key]}`)
-      .join("; ");
+    .map((key) => `${camelCaseToDashCase(key)}: ${styles[key]}`)
+    .join('; ');
 };
 
-const normalize = s => ({
+const normalize = (s) => ({
   ...s,
   currentStyles: defaultStyles,
-  currentText: ''
+  currentText: '',
 });
 
-export { capitalize, range, storage, isEqual, camelCaseToDashCase, toInlineStyles, normalize };
+const debounce = (cb, time) => {
+  let timeout;
+  return function (...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      // eslint-disable-next-line
+      cb.apply(this, args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, time);
+  }
+};
+
+export {
+  capitalize,
+  range,
+  storage,
+  isEqual,
+  camelCaseToDashCase,
+  toInlineStyles,
+  normalize,
+  debounce
+};
