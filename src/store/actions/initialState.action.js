@@ -1,7 +1,7 @@
 'use strict';
 
-import {normalize, storage} from '@core/utils';
-import {defaultStyles, defaultTitle} from "@/constants";
+import { clone, normalize } from '@core/utils';
+import { defaultStyles, defaultTitle } from '@/constants';
 
 const defaultState = {
   rowState: {},
@@ -13,4 +13,5 @@ const defaultState = {
   currentStyles: defaultStyles,
 };
 
-export const initialState = storage('excel-state') ? normalize(storage('excel-state')) : defaultState;
+export const normalizeInitialState = (state) =>
+  state ? normalize(state) : clone(defaultState);

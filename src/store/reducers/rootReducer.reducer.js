@@ -1,6 +1,5 @@
 // Чистая функция
 import {CHANGE_TEXT, CHANGE_STYLES, TABLE_RESIZE, APPLY_STYLE, CHANGE_TITLE} from "../actions/types.actions";
-import {toInlineStyles} from "@core/utils";
 export default function rootReducer(state, action) {
   let field,
       val;

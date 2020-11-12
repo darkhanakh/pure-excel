@@ -7,15 +7,18 @@ import Table from '@/components/table/Table';
 import rootReducer from '@/store/reducers/rootReducer.reducer';
 import Store from '@/store/Store';
 import { debounce, storage } from '@core/utils';
-import { initialState } from '@/store/actions/initialState.action';
+import {normalizeInitialState} from '@/store/actions/initialState.action';
+// 12:50
+const storageName = param => `excel:${param}`;
 
 export default class ExcelPage extends Page {
   getRoot() {
-    console.log(this.params);
-    const store = new Store(rootReducer, initialState);
+    const params = this.params ? this.params : Date.now().toString();
+    const state = storage(storageName(params));
+    const store = new Store(rootReducer, normalizeInitialState(state));
 
     const stateListener = debounce((state) => {
-      storage('excel-state', state);
+      storage(storageName(params), state);
       console.log('App state:', state);
     }, 300);
 

@@ -25,7 +25,7 @@ export const createRecordsTable = () => {
   const keys = getAllKeys();
 
   if (!keys.length) {
-    return `<p>Вы пока не создали ни одной записи</p>`;
+    return `<p class="records-none">Вы пока не создали ни одной записи</p>`;
   }
 
   return /*html*/ `

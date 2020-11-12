@@ -56,6 +56,10 @@ const debounce = (cb, time) => {
   };
 };
 
+const clone = obj => {
+  return JSON.parse(JSON.stringify(obj));
+};
+
 export {
   capitalize,
   range,
@@ -64,5 +68,6 @@ export {
   camelCaseToDashCase,
   toInlineStyles,
   normalize,
-  debounce
+  debounce,
+  clone
 };
