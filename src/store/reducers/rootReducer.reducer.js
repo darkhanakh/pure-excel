@@ -13,7 +13,7 @@ export default function rootReducer(state, action) {
       field = 'dataState';
       return {
         ...state,
-        currentText: action.data.value,
+        'currentText': action.data.value,
         [field]: value(state, field, action),
       };
     case CHANGE_STYLES:

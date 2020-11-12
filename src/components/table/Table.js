@@ -6,7 +6,7 @@ import TableSelection from './TableSelection';
 import $ from '@core/dom';
 import * as actions from '@/store/actions/actions';
 import { defaultStyles } from '@/constants';
-import parse from "@core/parse";
+import parse from '@core/parse';
 
 export default class Table extends ExcelComponent {
   static className = 'excel__table';
@@ -34,9 +34,8 @@ export default class Table extends ExcelComponent {
     this.selectCell($cell);
 
     this.$on('formula:input', (data) => {
-      this.selection.current
-          .attr('data-value', data)
-          .text(parse(data));
+      this.selection.current.attr('data-value', data);
+      this.selection.current.text(parse(data));
       this.updateTextInStore(data);
     });
 
@@ -111,12 +110,12 @@ export default class Table extends ExcelComponent {
   }
 
   updateTextInStore(value) {
-    this.$dispatch(
-      actions.changeText({
-        id: this.selection.current.id(),
-        value,
-      })
-    );
+    const action = actions.changeText({
+      id: this.selection.current.id(),
+      value,
+    });
+    this.$dispatch(action);
+    console.log(action);
   }
 
   onInput(e) {

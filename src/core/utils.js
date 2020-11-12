@@ -53,7 +53,7 @@ const debounce = (cb, time) => {
     };
     clearTimeout(timeout);
     timeout = setTimeout(later, time);
-  }
+  };
 };
 
 export {

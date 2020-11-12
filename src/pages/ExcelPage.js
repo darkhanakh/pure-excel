@@ -11,6 +11,7 @@ import { initialState } from '@/store/actions/initialState.action';
 
 export default class ExcelPage extends Page {
   getRoot() {
+    console.log(this.params);
     const store = new Store(rootReducer, initialState);
 
     const stateListener = debounce((state) => {

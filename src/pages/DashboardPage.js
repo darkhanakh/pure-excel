@@ -44,4 +44,8 @@ export default class DashboardPage extends Page {
       </div>
     `);
   }
+
+  destroy() {
+    return true;
+  }
 }
