@@ -1,38 +1,51 @@
-import {CHANGE_TEXT, CHANGE_STYLES, TABLE_RESIZE, APPLY_STYLE, CHANGE_TITLE} from './types.actions';
+import {
+  CHANGE_TEXT,
+  CHANGE_STYLES,
+  TABLE_RESIZE,
+  APPLY_STYLE,
+  CHANGE_TITLE,
+  UPDATE_DATE,
+} from './types.actions';
 
 // Action creator
-export const tableResize = data => {
+export const tableResize = (data) => {
   return {
     type: TABLE_RESIZE,
     data,
   };
 };
 
-export const changeText = data => {
+export const changeText = (data) => {
   return {
     type: CHANGE_TEXT,
     data,
   };
 };
 
-export const changeStyles = data => {
+export const changeStyles = (data) => {
   return {
     type: CHANGE_STYLES,
-    data
+    data,
   };
 };
 
 // val, ids
-export const applyStyle = data => {
+export const applyStyle = (data) => {
   return {
     type: APPLY_STYLE,
-    data
+    data,
   };
 };
 
-export const changeTitle = data => {
+export const changeTitle = (data) => {
   return {
     type: CHANGE_TITLE,
-    data
+    data,
+  };
+};
+
+export const updateDate = () => {
+  return {
+    type: UPDATE_DATE,
   };
 };

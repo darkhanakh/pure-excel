@@ -7,7 +7,10 @@ const toHTML = (key) => {
   return /*html*/ `
       <li class="dashboard__record">
           <a href="#excel/${id}">${model.title}</a>
-          <strong>26.10.2020</strong>
+          <strong>
+            ${new Date(model.openedData).toLocaleDateString()}           
+            ${new Date(model.openedData).toLocaleTimeString()}
+          </strong>
       </li>
     `;
 };
