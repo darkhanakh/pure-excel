@@ -8,7 +8,7 @@ import rootReducer from '@/store/reducers/rootReducer.reducer';
 import Store from '@/store/Store';
 import { debounce, storage } from '@core/utils';
 import {normalizeInitialState} from '@/store/actions/initialState.action';
-// 12:50
+
 const storageName = param => `excel:${param}`;
 
 export default class ExcelPage extends Page {
