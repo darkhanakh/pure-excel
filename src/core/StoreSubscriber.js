@@ -24,7 +24,7 @@ export default class StoreSubscriber {
     this.prevState = this.store.getState();
   }
 
-  unsubscribeFromStore(components) {
+  unsubscribeFromStore() {
     this.unsub();
   }
 }
