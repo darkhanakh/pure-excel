@@ -5,7 +5,7 @@ const toButton = button => {
       data-type="button"
       data-value=${JSON.stringify(button.value)}
       >
-        <span class="material-icons"> ${button.icon} </span>
+        <span class="material-icons" data-type="button" data-value=${JSON.stringify(button.value)}> ${button.icon} </span>
       </div>
     `;
 };

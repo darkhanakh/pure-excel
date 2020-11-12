@@ -29,13 +29,10 @@ export default class Toolbar extends ExcelStateComponent {
 
   onClick(e) {
     const $target = $(e.target);
-    const $parent = $target.parent('[data-type="button"]');
-    if ($parent) {
-      if ($parent.dataset.value) {
-        const style = JSON.parse($parent.dataset.value);
 
-        this.$trigger('toolbar:applyStyle', style);
-      }
+    if ($target.dataset.type === 'button') {
+      const value = JSON.parse($target.dataset.value);
+      this.$trigger('toolbar:applyStyle', value);
     }
   }
 

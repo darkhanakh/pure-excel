@@ -9,7 +9,7 @@ export default class StoreSubscriber {
 
   subscribeComponents(components) {
     this.prevState = this.store.getState();
-    this.sub = this.store.subscribe((state) => {
+    this.unsub = this.store.subscribe((state) => {
       Object.keys(state).forEach((key) => {
         if (!isEqual(this.prevState[key], state[key])) {
           components.forEach((component) => {
@@ -22,9 +22,13 @@ export default class StoreSubscriber {
       });
     });
     this.prevState = this.store.getState();
+
+    if (process.env.NODE_ENV === 'development') {
+      window['redux'] = this.prevState;
+    }
   }
 
-  unsubscribeFromStore(components) {
-    this.sub.unsubsribe();
+  unsubscribeFromStore() {
+    this.unsub();
   }
 }

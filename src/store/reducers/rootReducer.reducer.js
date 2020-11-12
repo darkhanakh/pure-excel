@@ -1,6 +1,12 @@
 // Чистая функция
-import {CHANGE_TEXT, CHANGE_STYLES, TABLE_RESIZE, APPLY_STYLE, CHANGE_TITLE} from "../actions/types.actions";
-import {toInlineStyles} from "@core/utils";
+import {
+  CHANGE_TEXT,
+  CHANGE_STYLES,
+  TABLE_RESIZE,
+  APPLY_STYLE,
+  CHANGE_TITLE,
+  UPDATE_DATE
+} from "../actions/types.actions";
 export default function rootReducer(state, action) {
   let field,
       val;
@@ -13,7 +19,7 @@ export default function rootReducer(state, action) {
       field = 'dataState';
       return {
         ...state,
-        currentText: action.data.value,
+        'currentText': action.data.value,
         [field]: value(state, field, action),
       };
     case CHANGE_STYLES:
@@ -36,6 +42,11 @@ export default function rootReducer(state, action) {
       return {
         ...state,
         title: action.data
+      };
+    case UPDATE_DATE:
+      return {
+        ...state,
+        openedData: new Date().toJSON()
       };
     default:
       return state;

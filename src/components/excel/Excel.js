@@ -1,10 +1,11 @@
 import $ from '@core/dom';
 import Observer from '@core/Observer';
 import StoreSubscriber from '@core/StoreSubscriber';
+import {updateDate} from "@/store/actions/actions";
+import {preventDefault} from "@core/utils";
 
 export default class Excel {
-  constructor(selector, options) {
-    this.$el = $(selector);
+  constructor(options) {
     this.components = options.components || [];
     this.observer = new Observer();
     this.store = options.store;
@@ -29,9 +30,12 @@ export default class Excel {
     return $root;
   }
 
-  render() {
-    this.$el.append(this.getRoot());
-
+  init() {
+    console.log(process.env.NODE_ENV);
+    if (process.env.NODE_ENV === 'production') {
+      document.addEventListener('contextmenu', preventDefault);
+    }
+    this.store.dispatch(updateDate());
     this.subscriber.subscribeComponents(this.components);
     this.components.forEach((component) => component.init());
   }
@@ -39,5 +43,6 @@ export default class Excel {
   destroy() {
     this.subscriber.unsubscribeFromStore();
     this.components.forEach((comp) => comp.destroy());
+    document.removeEventListener('contextmenu', preventDefault);
   }
 }

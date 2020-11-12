@@ -53,8 +53,16 @@ const debounce = (cb, time) => {
     };
     clearTimeout(timeout);
     timeout = setTimeout(later, time);
-  }
+  };
 };
+
+const clone = obj => {
+  return JSON.parse(JSON.stringify(obj));
+};
+
+function preventDefault(event) {
+  event.preventDefault();
+}
 
 export {
   capitalize,
@@ -64,5 +72,7 @@ export {
   camelCaseToDashCase,
   toInlineStyles,
   normalize,
-  debounce
+  debounce,
+  clone,
+  preventDefault
 };
