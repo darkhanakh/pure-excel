@@ -19,7 +19,6 @@ export default class ExcelPage extends Page {
 
     const stateListener = debounce((state) => {
       storage(storageName(params), state);
-      console.log('App state:', state);
     }, 300);
 
     store.subscribe(stateListener);

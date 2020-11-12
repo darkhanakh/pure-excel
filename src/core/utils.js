@@ -60,6 +60,10 @@ const clone = obj => {
   return JSON.parse(JSON.stringify(obj));
 };
 
+function preventDefault(event) {
+  event.preventDefault();
+}
+
 export {
   capitalize,
   range,
@@ -69,5 +73,6 @@ export {
   toInlineStyles,
   normalize,
   debounce,
-  clone
+  clone,
+  preventDefault
 };
