@@ -14,7 +14,7 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
-describe('Store testing', () => {
+describe('Store', () => {
   let store;
   let handler;
 

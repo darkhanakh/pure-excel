@@ -8,4 +8,6 @@ export default class Page {
   }
 
   afterRender() {}
+
+  destroy() {}
 }
