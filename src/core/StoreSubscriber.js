@@ -29,6 +29,6 @@ export default class StoreSubscriber {
   }
 
   unsubscribeFromStore() {
-    this.unsub();
+    this.unsub.unsubscribe();
   }
 }
