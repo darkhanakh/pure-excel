@@ -64,6 +64,9 @@ function preventDefault(event) {
   event.preventDefault();
 }
 
+const storageName = (param) => `excel:${param}`;
+
+
 export {
   capitalize,
   range,
@@ -74,5 +77,6 @@ export {
   normalize,
   debounce,
   clone,
-  preventDefault
+  preventDefault,
+  storageName
 };
